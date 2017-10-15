@@ -19,7 +19,10 @@ var express             = require("express"),
     
 
 //connect to the yelp_camp database
-mongoose.connect("mongodb://localhost/yelp_camp_v10", { useMongoClient: true }); 
+// mongoose.connect("mongodb://localhost/yelp_camp_v10", { useMongoClient: true }); 
+mongoose.connect("mongodb://Veverita:password@ds121565.mlab.com:21565/yelpcamp", { useMongoClient: true }); 
+
+// mongodb://Veverita:password@ds121565.mlab.com:21565/yelpcamp
 // use body parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -63,6 +66,6 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("The Yelp Camp Server v13 has started!");
-});
+}); 
 
 
