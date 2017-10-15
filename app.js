@@ -16,13 +16,12 @@ var express             = require("express"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index");
     
-    
+    console.log(process.env.DATABASEURL);
 
 //connect to the yelp_camp database
 // mongoose.connect("mongodb://localhost/yelp_camp_v10", { useMongoClient: true }); 
-mongoose.connect("mongodb://Veverita:password@ds121565.mlab.com:21565/yelpcamp", { useMongoClient: true }); 
+mongoose.connect(process.env.DATABASEURL, { useMongoClient: true }); 
 
-// mongodb://Veverita:password@ds121565.mlab.com:21565/yelpcamp
 // use body parser
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
