@@ -16,10 +16,11 @@ var express             = require("express"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index");
     
-    console.log(process.env.DATABASEURL);
 
 //connect to the yelp_camp database
-// mongoose.connect("mongodb://localhost/yelp_camp_v10", { useMongoClient: true }); 
+
+// use $ export DATABASEURL="ongodb://localhost/yelp_camp_v10 in console and 
+// $ heroku config:set DATABASEURL=mongodb://Veverita:password@ds121565.mlab.com:21565/yelpcamp
 mongoose.connect(process.env.DATABASEURL, { useMongoClient: true }); 
 
 // use body parser
