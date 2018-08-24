@@ -1,29 +1,26 @@
 var express             = require("express"),
     app                 = express(),
     bodyParser          = require("body-parser"),
-    mongoose            = require("mongoose"), //adds mongoose
+    mongoose            = require("mongoose"),
     flash               = require("connect-flash"),
     passport            = require("passport"),
     LocalStrategy       = require("passport-local"),
     methodOverride      = require("method-override"),
     // after making models dir and adding the campgrounds schema in a file which exports it (module.exports)
-    Campground          = require("./models/campground"), // "./" means it's in the same dir as this file
+    Campground          = require("./models/campground"), 
     Comment             = require("./models/comment"),
     User                = require("./models/user"),
+    
     // seedDB              = require("./seeds"),
-//require the routes files
+    
+    //require the routes files
     commentRoutes       = require("./routes/comments"),
     campgroundRoutes    = require("./routes/campgrounds"),
     indexRoutes         = require("./routes/index");
     
 
 //connect to the yelp_camp database
-
-// ===============delete this=============================
-// use $ export DATABASEURL=mongodb://localhost/yelp_camp_v10 in console and 
-// $ heroku config:set DATABASEURL=mongodb://Veverita:password@ds121565.mlab.com:21565/yelpcamp
-// =======================================================
-var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v10"
+var url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp"
 mongoose.connect(url, { useMongoClient: true }); 
 
 // use body parser
@@ -32,8 +29,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
-// seed the DB at the beginning
-// seedDB(); //seed the database
+
 
 
 // PASSPORT CONFIGURATION
@@ -48,7 +44,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-//to add moment js for time since created
+// add moment.js for time since created
 app.locals.moment = require("moment");
 
 //To add {currentUser: req.user} to all routes as is in the INDEX page
@@ -68,7 +64,7 @@ app.use("/campgrounds/:id/comments", commentRoutes);
 
 
 app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("The Yelp Camp Server v13 has started!");
+    console.log("The Yelp Camp Server has started!");
 }); 
 
 
